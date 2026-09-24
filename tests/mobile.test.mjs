@@ -59,6 +59,10 @@ elements('mobileUndo').onclick();assert.equal(run("state.rippleMode||'off'"),'of
 run("openExport()");const sheet=elements('exportDialog');sheet.getBoundingClientRect=()=>({left:0,right:390,top:300,bottom:664});
 const at=(type,y)=>{const e=new window.Event(type,{bubbles:true});Object.assign(e,{clientX:100,clientY:y,pointerType:'touch'});sheet.dispatchEvent(e);};
 context.setTimeout=()=>1;at('pointerdown',100);at('pointerup',100);assert(sheet.open);at('click',100);assert(!sheet.open);context.setTimeout=(f,ms=0)=>{if(ms<1000)f();return 0;};
+// Zoom bar: presets frame a duration around the playhead, the slider spans the whole montage to 500 px/s.
+elements('zoomTool').onclick();assert(!elements('mobileZoom').hidden);document.querySelector('[data-zoom-span="10"]').onclick();assert(Math.abs(run('pps')-(294-96)/10)<1e-9);assert(elements('zoomSpan').textContent.includes('10 s'));
+document.querySelector('[data-zoom-step="1"]').onclick();assert(Math.abs(run('pps')-(294-96)/10*1.5)<1e-9);elements('zoomSlider').value='1000';elements('zoomSlider').oninput({target:elements('zoomSlider')});assert.equal(run('pps'),500);
+document.querySelector('[data-zoom-span="fit"]').onclick();assert.equal(elements('zoomSlider').value,'0');
 // Layout choice: desktop on a phone is remembered, choosing the automatic layout again clears it.
 run("setLayout('desktop')");assert(!run('mobile'));assert(!document.documentElement.classList.contains('mobile'));assert.equal(storage.get('onde-layout'),'desktop');
 run("setLayout('mobile')");assert(run('mobile'));assert.equal(storage.get('onde-layout'),'auto');

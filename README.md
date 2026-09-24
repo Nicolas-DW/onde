@@ -56,7 +56,8 @@ node --test tests/*.test.mjs
 Une interface tactile s'active automatiquement sur les petits écrans (largeur ≤ 760 px, ou téléphone en paysage). Elle utilise le même montage, les mêmes projets et les mêmes réglages ; seules la présentation et les gestes changent :
 
 - barre du haut : nom du projet, annuler, rétablir, sauvegarder et menu ⋯ (projets, export, master FX, pistes, analyse, grille, aide) ;
-- un doigt fait défiler le montage, deux doigts zooment, la règle place la tête de lecture ;
+- un doigt fait défiler le montage, la règle place la tête de lecture ;
+- zoom : pincement à deux doigts, ou bouton Zoom (curseur de durée visible, paliers − / +, cadrages Tout, 1 min, 10 s, 2 s centrés sur la tête de lecture) ;
 - toucher un bloc le sélectionne et affiche sa barre (réglages, FX, couper, options, supprimer) ; un bloc sélectionné se déplace au doigt, poignées agrandies, défilement automatique près des bords ; appui long : options du bloc ;
 - toucher le nom d'une piste ouvre ses options (nom, volume, FX, aimant, ordre, import, suppression) ;
 - les fenêtres deviennent des panneaux qui montent du bas ; réglages précis par curseurs (fondus, décalage ±0,1 s / ±1 s) ;

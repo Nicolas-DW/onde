@@ -104,6 +104,14 @@ html.mobile .time-display strong{font-size:19px;letter-spacing:-.5px}
 html.mobile #playSpeed{height:44px;max-width:none;margin:0;padding:6px 8px;font-size:16px}
 html.mobile .master{display:none}
 
+html.mobile body{touch-action:pan-x pan-y}
+html.mobile .mobile-zoom{flex:none;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:4px 6px;padding:6px 10px;background:#161f25;border-top:1px solid var(--border);animation:bar-in .18s ease-out}
+.mobile-zoom>button{width:44px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.mobile-zoom .icon{width:20px;height:20px}
+.zoom-presets{grid-column:1/-1;display:flex;align-items:center;gap:6px}
+.zoom-presets button{flex:1;min-height:34px;padding:0 4px;font-size:13px}
+.zoom-presets output{flex:none;min-width:64px;text-align:right;font:12px ui-monospace,monospace;color:var(--mint)}
+
 /* Status messages float above the bars. */
 html.mobile footer{position:fixed;left:12px;right:12px;bottom:var(--toast-bottom,160px);z-index:30;height:auto;padding:0;border:0;justify-content:center;pointer-events:none;background:none}
 html.mobile #status{flex:none;max-width:100%;padding:7px 12px;border:1px solid #40505b;border-radius:12px;background:#26333bf2;color:var(--text);font-size:12.5px;line-height:1.4;text-align:center;white-space:normal;box-shadow:0 8px 24px #0008}
@@ -209,6 +217,9 @@ html.mobile .asset button .icon{width:20px;height:20px}
  html.mobile .clip,html.mobile .cross-overlay{top:6px;height:76px}
  html.mobile .clip .wave{top:21px;height:46px}
  html.mobile .track-actions [data-track-fx].active{display:none}
+ html.mobile .mobile-zoom{grid-template-columns:44px 1fr 44px auto;padding:2px 10px}
+ html.mobile .zoom-presets{grid-column:auto}
+ html.mobile .zoom-presets output{min-width:56px}
 }
 @keyframes sheet-in{from{transform:translateY(48px);opacity:.3}}
 @keyframes bar-in{from{transform:translateY(12px);opacity:0}}
