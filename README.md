@@ -29,7 +29,7 @@ Les préréglages personnels sont aussi propres au navigateur et ne migrent pas 
 
 ## Modifier hors ChatGPT
 
-- `dist/index.html` : interface ; `dist/style.css` : apparence.
+- `dist/index.html` : interface ; `dist/style.css` : apparence ; `dist/mobile.css` : interface téléphone.
 - `dist/app.js` : coordination de l'éditeur.
 - `dist/*.mjs` : montage, audio, transport, stockage, effets.
 - Workers et worklet : traitements audio.
@@ -51,4 +51,17 @@ npm ci --prefix tests
 node --test tests/*.test.mjs
 ```
 
-L'extraction conserve les fonctionnalités et l'interface existantes. Elle n'ajoute pas d'adaptation tactile. Déployer depuis l'iPhone ne garantit pas le confort d'utilisation de l'éditeur sur ce téléphone.
+## Sur téléphone
+
+Une interface tactile s'active automatiquement sur les petits écrans (largeur ≤ 760 px, ou téléphone en paysage). Elle utilise le même montage, les mêmes projets et les mêmes réglages ; seules la présentation et les gestes changent :
+
+- barre du haut : nom du projet, annuler, rétablir, sauvegarder et menu ⋯ (projets, export, master FX, pistes, analyse, grille, aide) ;
+- un doigt fait défiler le montage, deux doigts zooment, la règle place la tête de lecture ;
+- toucher un bloc le sélectionne et affiche sa barre (réglages, FX, couper, options, supprimer) ; un bloc sélectionné se déplace au doigt, poignées agrandies, défilement automatique près des bords ; appui long : options du bloc ;
+- toucher le nom d'une piste ouvre ses options (nom, volume, FX, aimant, ordre, import, suppression) ;
+- les fenêtres deviennent des panneaux qui montent du bas ; réglages précis par curseurs (fondus, décalage ±0,1 s / ±1 s) ;
+- Menu → Interface ordinateur rétablit la présentation complète ; Affichage → Interface téléphone l'impose sur tout appareil (choix mémorisé dans le navigateur).
+
+Dans Safari, Partager → Sur l'écran d'accueil installe Onde en plein écran (`manifest.webmanifest`, icônes `icon-180.png` et `icon-512.png`).
+
+Fichiers : `dist/mobile.css` (présentation, active seulement avec la classe `mobile` sur `<html>`) et la dernière section de `dist/app.js` (gestes et panneaux). `tests/mobile.test.mjs` couvre ces comportements.

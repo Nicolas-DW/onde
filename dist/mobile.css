@@ -1,0 +1,216 @@
+/* Phone layout: active when <html> carries .mobile (small screens, or chosen in Affichage / Menu). */
+html:not(.mobile) .mobile-only{display:none!important}
+.bottom-bar{display:contents}
+.track-more{display:none}
+:root.mobile{--track:96px}
+html.mobile .desktop-help{display:none}
+html.mobile body{height:100dvh;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:none;padding:0 env(safe-area-inset-right) 0 env(safe-area-inset-left);-webkit-tap-highlight-color:transparent}
+html.mobile button,html.mobile summary,html.mobile select{touch-action:manipulation}
+html.mobile input,html.mobile select,html.mobile textarea{font-size:16px}
+html.mobile button:disabled{opacity:.3}
+
+/* Top bar: name, undo, redo, save, menu. */
+html.mobile header{flex:none;height:auto;min-height:0;flex-wrap:nowrap;gap:6px;padding:calc(env(safe-area-inset-top) + 6px) 6px 6px 12px}
+html.mobile .brand{font-size:0;gap:0;pointer-events:none}
+html.mobile .brand svg{width:22px;height:26px}
+html.mobile .project-title{flex:1;min-width:0;border-left:0;padding-left:4px}
+html.mobile .project-title input{width:100%;font-size:16px;font-weight:650;text-overflow:ellipsis}
+html.mobile #saveState{font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.mobile .file-actions{width:auto;margin-left:0;gap:0;flex-wrap:nowrap}
+html.mobile .file-actions>button:not(.mobile-only){display:none}
+html.mobile .file-actions .mobile-only{position:relative;width:42px;height:42px;padding:0!important;border:0;border-radius:10px;background:transparent;display:inline-flex;align-items:center;justify-content:center}
+html.mobile .file-actions .mobile-only .icon{width:22px;height:22px}
+html.mobile #mobileSave.dirty::after{content:"";position:absolute;top:8px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 2px var(--bg)}
+
+/* Workspace. */
+html.mobile main{flex:1;min-height:0;height:auto;display:flex}
+html.mobile .editor{flex:1;min-width:0}
+html.mobile .edit-toolbar,html.mobile .inspector{display:none!important}
+html.mobile .timeline-scroll{min-height:0;touch-action:pan-x pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html.mobile .ruler,html.mobile .ruler-label{height:60px}
+html.mobile .ruler-label{font-size:0;padding:0;justify-content:center}
+html.mobile .ruler-label button{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#26382f}
+html.mobile .ruler-label .icon{width:22px;height:22px}
+html.mobile .tick{padding-top:4px}
+html.mobile #loopLane{top:24px}
+html.mobile .playhead{pointer-events:none}
+html.mobile .playhead span{left:-3px;width:15px;height:17px}
+html.mobile .lane{touch-action:pan-x pan-y}
+html.mobile .track{height:104px}
+html.mobile .clip,html.mobile .cross-overlay{top:9px;height:86px}
+html.mobile .clip-name{height:20px;font-size:12px;line-height:18px}
+html.mobile .clip .wave{top:22px;height:54px}
+html.mobile .hesitation-band{top:20px}
+html.mobile .clip-fx,html.mobile .fade-hit{pointer-events:none}
+
+/* A block is tapped to select it; only a selected block can be dragged and shows its handles. */
+html.mobile .clip:not(.selected){touch-action:pan-x pan-y}
+html.mobile .clip:not(.selected) *{pointer-events:none!important}
+html.mobile .clip:not(.selected) .fade-handle,html.mobile .clip:not(.selected) .trim,html.mobile .cross-overlay:not(.selected) .fade-handle{display:none}
+html.mobile .clip.selected{box-shadow:inset 0 0 0 1px var(--mint),0 0 0 3px #b1ebd340}
+html.mobile .clip.selected .trim{top:22px;width:22px;background:linear-gradient(90deg,#ffffff26,transparent)}
+html.mobile .clip.selected .trim.right{background:linear-gradient(270deg,#ffffff26,transparent)}
+html.mobile .clip.selected .trim::after{content:"";position:absolute;top:50%;left:50%;width:4px;height:26px;margin:-13px 0 0 -2px;border-radius:2px;background:var(--color)}
+html.mobile .volume-hit{stroke-width:30}
+html.mobile .fade-handle{width:22px;height:22px;margin-top:-5px;border-radius:6px}
+html.mobile .fade-handle::after{top:10px;left:6px;width:10px}
+html.mobile .fade-handle::before{content:"";position:absolute;inset:-10px}
+html.mobile .transition-marker{height:20px}
+html.mobile .transition-marker button{line-height:20px;padding:0 6px}
+html.mobile .timeline-marker .marker-tag button{max-width:130px;padding:0 8px;font-size:12px;line-height:30px}
+html.mobile .timeline-marker .marker-tag [data-marker-lock]{width:32px}
+html.mobile .zone-edge{width:22px;background:#d7be7740}
+html.mobile .zone-edge::after{content:"";position:absolute;top:7px;bottom:7px;left:50%;width:3px;margin-left:-1.5px;border-radius:2px;background:#f0dba6}
+html.mobile .empty{top:72px;right:auto;width:calc(100vw - var(--track) - env(safe-area-inset-left) - env(safe-area-inset-right));height:auto;gap:12px;padding:16px}
+html.mobile .empty button{min-height:48px;padding:10px 18px;font-size:15px;white-space:normal}
+html.mobile #emptyDemo{background:transparent;border-color:#3c4b55;color:#c3ccd3}
+
+/* Track headers: name and options, mute and solo. */
+html.mobile .track-header{display:flex;flex-direction:column;gap:4px;padding:6px 4px 6px 8px;box-shadow:none;overflow:hidden}
+html.mobile .track-grip,html.mobile .track-remove,html.mobile .track-header input[type=range],html.mobile .track-actions [data-snap],html.mobile .track-actions small,html.mobile .track-actions [data-track-fx]:not(.active){display:none}
+html.mobile .track-name{gap:0;align-items:center}
+html.mobile .track-name input{pointer-events:none;padding:0;font-size:13px;font-weight:650;text-overflow:ellipsis}
+html.mobile .track-more{display:inline-flex;align-items:center;justify-content:center;flex:none;width:32px;height:30px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--muted)}
+html.mobile .track-actions{margin-top:0;gap:4px}
+html.mobile .track-actions button{min-width:36px;height:34px;padding:0 6px;font-size:14px;border-radius:8px}
+html.mobile .track-actions [data-track-fx].active{min-width:0;height:20px;padding:0 6px;font-size:10px}
+
+/* Selected block bar, tools, transport. */
+html.mobile .mobile-selection{flex:none;display:flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;background:#1b2925;border-top:1px solid #3b5148;animation:bar-in .18s ease-out}
+.selection-name{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.selection-name strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.selection-name small{font:11px ui-monospace,monospace;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mobile-selection button{flex:none;width:42px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;background:transparent;color:var(--text)}
+.mobile-selection .icon{width:22px;height:22px}
+.mobile-selection .fx-text{font-size:13px;font-weight:700;color:var(--mint)}
+.mobile-selection .fx-text.active{background:var(--mint);color:#16251e}
+.mobile-selection [data-mobile=delete]{color:#eeafa4}
+html.mobile .bottom-bar{flex:none;display:flex;flex-direction:column;background:#151c22;border-top:1px solid var(--border)}
+html.mobile .mobile-tools{display:flex;gap:0;padding:4px 4px 0;overflow-x:auto;scrollbar-width:none}
+.mobile-tools::-webkit-scrollbar{display:none}
+.mobile-tools button{position:relative;flex:1 0 auto;min-width:42px;height:52px;padding:4px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px solid transparent;border-radius:10px;background:transparent;color:#c3ccd3;font-size:10.5px;line-height:1}
+.mobile-tools .icon{width:22px;height:22px}
+.mobile-tools button[aria-pressed=true]{color:var(--mint);background:#283831;border-color:#3b5148}
+.mobile-tools [data-proxy=zoneButton][aria-pressed=true]{color:#f0dba6;background:#362f20;border-color:#806d42}
+.mobile-tools [data-mode="2"]{color:#f0cf92!important;background:#3a3021!important;border-color:#806740!important}
+.mobile-tools .mode-badge{position:absolute;top:3px;right:3px;min-width:14px;height:14px;font-size:9px;border-radius:3px}
+html.mobile .transport{height:auto;min-height:0;gap:6px;padding:4px 10px calc(6px + env(safe-area-inset-bottom));border-top:0;background:transparent}
+html.mobile .transport-buttons{gap:0}
+html.mobile .transport-buttons button{width:44px;height:48px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+html.mobile .transport-buttons #play{width:52px;height:52px;margin:0 2px}
+html.mobile .transport-buttons .icon{width:22px;height:22px}
+html.mobile .time-display{flex:1;min-width:0;gap:0}
+html.mobile .time-display strong{font-size:19px;letter-spacing:-.5px}
+html.mobile #playSpeed{height:44px;max-width:none;margin:0;padding:6px 8px;font-size:16px}
+html.mobile .master{display:none}
+
+/* Status messages float above the bars. */
+html.mobile footer{position:fixed;left:12px;right:12px;bottom:var(--toast-bottom,160px);z-index:30;height:auto;padding:0;border:0;justify-content:center;pointer-events:none;background:none}
+html.mobile #status{flex:none;max-width:100%;padding:7px 12px;border:1px solid #40505b;border-radius:12px;background:#26333bf2;color:var(--text);font-size:12.5px;line-height:1.4;text-align:center;white-space:normal;box-shadow:0 8px 24px #0008}
+html.mobile #status:empty{display:none}
+
+/* Every dialog becomes a bottom sheet. */
+html.mobile dialog{width:100%!important;max-width:none!important;margin:auto 0 var(--keyboard,0px);max-height:calc(100dvh - env(safe-area-inset-top) - 24px - var(--keyboard,0px));padding:0 16px calc(18px + env(safe-area-inset-bottom));border-width:1px 0 0;border-radius:18px 18px 0 0;animation:sheet-in .24s cubic-bezier(.2,.8,.2,1);transition:transform .12s}
+html.mobile dialog::backdrop{background:#05090cb8}
+html.mobile #unsavedDialog,html.mobile #nameDialog form{padding-top:14px}
+html.mobile .dialog-head{position:sticky;top:0;z-index:3;margin:0 -16px 6px;padding:16px 8px 8px 16px;background:#1b232a;touch-action:none}
+html.mobile .dialog-head::before{content:"";position:absolute;top:6px;left:50%;width:38px;height:4px;margin-left:-19px;border-radius:2px;background:#4a5a66}
+html.mobile .dialog-head h2{font-size:18px;line-height:1.3}
+html.mobile .dialog-head .icon-button{width:44px;height:44px}
+html.mobile .dialog-head .icon-button:focus-visible{outline-color:transparent}
+html.mobile #dockInspector{display:none}
+html.mobile .dialog-actions{gap:8px}
+html.mobile .dialog-actions button,html.mobile .dialog-toolbar button{flex:1;min-height:46px;white-space:normal}
+html.mobile dialog select,html.mobile dialog input[type=number],html.mobile #nameValue{min-height:44px;padding:8px 10px}
+html.mobile .form-grid{gap:12px}
+html.mobile .check{min-height:40px;font-size:15px}
+html.mobile .check input{width:22px;height:22px}
+html.mobile .fx-grid{grid-template-columns:1fr;gap:12px}
+html.mobile .fx-field{font-size:14px}
+html.mobile .fx-field output{font-size:13px}
+html.mobile .fx-top button{min-height:44px}
+html.mobile .project-row{flex-wrap:wrap}
+html.mobile .project-row-actions{width:100%}
+html.mobile .project-row-actions button{flex:1;min-height:44px}
+html.mobile .settings-actions button{flex:1 1 calc(50% - 6px);min-height:44px;font-size:14px}
+html.mobile .settings-scope{flex-wrap:wrap}
+html.mobile .saved-setting button,html.mobile .curve-buttons button{min-height:44px;font-size:14px}
+html.mobile .full-button,html.mobile .delete-button{min-height:48px;font-size:15px}
+html.mobile .delete-button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:18px;color:#e3aaa4;background:none}
+html.mobile .portable-export{padding:14px}
+html.mobile .clip-name-input{padding:10px 0;font-size:16px}
+html.mobile .field label{font-size:14px}
+html.mobile #blockDialog .field{margin:16px 0 0}
+html.mobile #blockDialog .duration{margin:12px 0 0;padding-bottom:12px}
+html.mobile #curveEditor{touch-action:none}
+html.mobile dd{font-size:14px}
+html.mobile input[type=range]{-webkit-appearance:none;appearance:none;height:34px;margin:0;background:transparent}
+html.mobile input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#34414a}
+html.mobile input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border:3px solid #1b232a;border-radius:50%;background:var(--mint);box-shadow:0 1px 4px #0008}
+html.mobile input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:#34414a}
+html.mobile input[type=range]::-moz-range-thumb{width:20px;height:20px;border:3px solid #1b232a;border-radius:50%;background:var(--mint)}
+.nudge{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.nudge button{min-height:42px;padding:0;font:13px ui-monospace,monospace}
+.sheet-row{display:flex;gap:8px;margin-top:14px}
+.sheet-row button{flex:1;min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:normal}
+.sheet-row button[aria-pressed=true],.segmented button[aria-pressed=true]{color:var(--mint);background:#283831;border-color:#466353}
+.segmented{display:flex;gap:4px;padding:4px;border-radius:10px;background:#12191f}
+.segmented button{flex:1;min-height:42px;padding:4px;border:1px solid transparent;background:transparent;font-size:13px;line-height:1.2;white-space:normal}
+#trackDialog .full-button{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px 0 0}
+#trackDialog .fine-print{margin-top:8px}
+
+/* Menu, block options, markers and files as sheets over a shared backdrop. */
+.sheet-list{display:flex;flex-direction:column}
+.sheet-list button{display:flex;align-items:center;gap:14px;min-height:52px;padding:8px 6px;border:0;border-radius:10px;background:transparent;text-align:left;font-size:15px;white-space:normal}
+.sheet-list .icon{width:22px;height:22px;color:var(--mint)}
+.sheet-list span{display:flex;flex-direction:column;min-width:0}
+.sheet-list small{font-size:12px;color:var(--muted)}
+.sheet-list hr{margin:4px 0;border:0;border-top:1px solid var(--border)}
+.sheet-list [aria-pressed=false] .icon{color:var(--muted)}
+.sheet-backdrop{position:fixed;inset:0;z-index:40;background:#05090cb8;animation:fade-in .2s}
+.sheet-backdrop.closing{opacity:0;transition:opacity .15s}
+html.mobile .clip-menu{left:0!important;right:0;top:auto!important;bottom:0;width:auto;max-height:78dvh;padding:12px 10px calc(10px + env(safe-area-inset-bottom));border-width:1px 0 0;border-radius:18px 18px 0 0;animation:sheet-in .22s ease-out}
+html.mobile .clip-menu button{min-height:48px;padding:10px 12px;font-size:15px}
+html.mobile .clip-menu .icon,html.mobile .menu-icon-space{width:20px;height:20px}
+html.mobile .marker-popover{left:0!important;right:0;top:auto!important;bottom:var(--keyboard,0px);width:auto;max-width:none;padding:18px 16px calc(16px + env(safe-area-inset-bottom));border-width:1px 0 0;border-radius:18px 18px 0 0;animation:sheet-in .22s ease-out}
+html.mobile .marker-popover input:not([type=checkbox]),html.mobile .marker-popover textarea{min-height:44px;font-size:16px}
+html.mobile #markerColor{width:48px;height:44px}
+html.mobile .marker-popover label input{width:130px}
+html.mobile .marker-popover .check input{width:22px;min-height:0}
+html.mobile .marker-popover button{flex:1;min-height:46px;padding:8px 12px;font-size:14px}
+html.mobile .marker-popover #deleteMarker{margin-right:0}
+html.mobile .library:not([hidden]){position:fixed;top:auto;left:0;right:0;bottom:0;z-index:45;width:auto;max-height:min(80dvh,680px);padding:18px 16px calc(16px + env(safe-area-inset-bottom));border:1px solid #40505b;border-width:1px 0 0;border-radius:18px 18px 0 0;background:#1b232a;box-shadow:0 -12px 40px #0009;animation:sheet-in .22s ease-out}
+html.mobile .library .section-heading{font-size:12px}
+html.mobile .panel-close{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
+html.mobile .import-button{min-height:48px;font-size:15px}
+.library-target{display:flex;flex-direction:column;gap:6px;margin:16px 0 0;font-size:13px;color:var(--muted)}
+.library-target select{min-height:44px}
+.library-hint{margin:6px 0 0;font-size:12px;color:var(--muted)}
+html.mobile .asset{grid-template-columns:minmax(0,1fr) 46px 46px;cursor:default}
+html.mobile .asset .asset-name{font-size:16px}
+html.mobile .asset button[data-add],html.mobile .asset .asset-remove{width:46px;height:42px;border-radius:9px}
+html.mobile .asset button[data-add]{background:#26382f}
+html.mobile .asset button .icon{width:20px;height:20px}
+
+/* Landscape phones: tools and transport share one row. */
+@media (orientation:landscape){
+ html.mobile header{padding-top:calc(env(safe-area-inset-top) + 2px);padding-bottom:2px}
+ html.mobile #saveState{display:none}
+ html.mobile .bottom-bar{flex-direction:row;align-items:center}
+ html.mobile .mobile-tools{order:2;flex:1;min-width:0;padding:2px 4px}
+ html.mobile .mobile-tools button{flex:0 0 auto;height:46px}
+ html.mobile .transport{order:1;flex:none;padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom))}
+ html.mobile .time-display{flex:none;min-width:110px}
+ html.mobile .ruler,html.mobile .ruler-label{height:56px}
+ html.mobile #loopLane{top:22px;height:34px}
+ html.mobile .project-title{flex:0 1 200px}
+ html.mobile .mobile-selection{position:fixed;z-index:20;top:env(safe-area-inset-top);left:calc(env(safe-area-inset-left) + 250px);right:calc(env(safe-area-inset-right) + 180px);height:48px;padding:2px 4px 2px 12px;border:1px solid #3b5148;border-top:0;border-radius:0 0 14px 14px}
+ html.mobile .track{height:88px}
+ html.mobile .clip,html.mobile .cross-overlay{top:6px;height:76px}
+ html.mobile .clip .wave{top:21px;height:46px}
+ html.mobile .track-actions [data-track-fx].active{display:none}
+}
+@keyframes sheet-in{from{transform:translateY(48px);opacity:.3}}
+@keyframes bar-in{from{transform:translateY(12px);opacity:0}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){html.mobile *,html.mobile *::before,.sheet-backdrop{animation:none!important;transition:none!important}}
