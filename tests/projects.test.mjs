@@ -1,0 +1,7 @@
+import 'fake-indexeddb/auto';
+import assert from 'node:assert/strict';
+import {listProjects,readProject,writeProject,deleteProject} from '../dist/projects.mjs';
+const record={id:'one',version:3,state:{name:'Podcast A',tracks:[{id:'t',fx:{enabled:true,threshold:-20}}],clips:[{id:'c',start:2,duration:5,fx:{enabled:true,deess:30}}],markers:[{id:'m',time:2,title:'Intro',note:'Couper ici',color:'#abcdef'}],analysis:{results:{a:[{start:1,end:2}]}}},view:{cursor:3,pps:45,scrollLeft:90},assets:[{id:'a',name:'Voix.wav',blob:new Blob(['audio'])}]};
+assert.equal(await writeProject(record),1);const opened=await readProject('one');assert.equal(opened.view.cursor,3);assert.equal(opened.state.markers[0].note,'Couper ici');assert.equal(await opened.assets[0].blob.text(),'audio');
+record.state.name='Podcast révisé';assert.equal(await writeProject(record,1),2);await assert.rejects(writeProject({...record,state:{...record.state,name:'Stale'}},1),/autre onglet/);assert.equal((await readProject('one')).state.name,'Podcast révisé');
+const copy={...opened,id:'two',state:{...opened.state,name:'Copie'}};assert.equal(await writeProject(copy),1);assert.equal((await listProjects()).length,2);await deleteProject('two');assert.equal((await listProjects()).length,1);assert.equal((await readProject('one')).revision,2);await deleteProject('one');console.log('IndexedDB : état complet + sources, remplacement atomique, conflit entre onglets, copie indépendante et suppression : OK.');

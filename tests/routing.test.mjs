@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import {effectChain,prepareEffects} from '../dist/effects.mjs';
+const links=[],loaded=[],nodes=[];const node=type=>{const n={type,frequency:{value:0},Q:{value:0},gain:{value:1},connect(other){links.push([n,other]);},disconnect(){}};nodes.push(n);return n;};
+const context={createGain:()=>node('gain'),createBiquadFilter:()=>node('biquad'),audioWorklet:{async addModule(url){loaded.push(url.href);}}};
+globalThis.AudioWorkletNode=class{constructor(c,name,options){Object.assign(this,node(name));this.options=options;}};
+const state={fx:{enabled:true,compress:true},tracks:[],clips:[]};await prepareEffects(context,state);await prepareEffects(context,state);assert.equal(loaded.length,1);assert(loaded[0].endsWith('/dist/voice-worklet.js'));
+const chain=effectChain(context,{enabled:true,highpass:80,bass:-2,presence:3,deess:30,compress:true,limiter:true});assert.equal(nodes[1].type,'highpass');assert.equal(nodes[1].frequency.value,80);assert.equal(chain.output.options.processorOptions.deess,30);assert.equal(links.length,4);assert.equal(links[0][0],chain.input);assert.equal(links.at(-1)[1],chain.output);chain.disconnect();
+const old=nodes.length;effectChain(context,{enabled:false,compress:true,highpass:80});assert.equal(nodes.length,old+1);console.log('Chaîne de traitement : module chargé une fois, EQ avant dynamique, paramètres transmis, bypass : OK.');

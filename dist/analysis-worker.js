@@ -1,0 +1,2 @@
+import {voiceFeatures,hesitationCandidates} from './analysis.mjs';
+const cache=new Map();self.onmessage=({data:m})=>{try{let frames=cache.get(m.asset);if(!frames){if(!m.samples)throw Error('Source audio manquante.');frames=voiceFeatures(m.samples,m.rate,p=>self.postMessage({id:m.id,progress:p}));cache.set(m.asset,frames);}self.postMessage({id:m.id,segments:hesitationCandidates(frames,m.sensitivity,m.minDuration)});}catch(e){self.postMessage({id:m.id,error:e.message});}};

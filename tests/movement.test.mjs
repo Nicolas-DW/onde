@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {snapEdges,snapTime,rippleFollowers} from '../dist/movement.mjs';
+const tracks=[{id:'a'},{id:'b',snap:false}],clips=[{id:'1',track:'a',start:1,duration:2},{id:'2',track:'a',start:5,duration:1},{id:'3',track:'b',start:6,duration:2}];
+assert.deepEqual(snapEdges(clips,tracks),[1,3,5,6]);assert.deepEqual(snapEdges(clips,tracks,'b'),[]);assert.deepEqual(snapEdges(clips,tracks,'a',new Set(['2'])),[1,3]);
+assert.equal(snapTime(3.1,[3],40).time,3);assert.equal(snapTime(3.1,[3],500).time,3.1);assert.equal(snapTime(3.99,[6],100,[0,2]).time,4);assert.equal(snapTime(.05,[0],100,[0],.04).time,.05);
+assert.deepEqual(rippleFollowers(clips,clips[0],'track').map(c=>c.id),['2']);assert.deepEqual(rippleFollowers(clips,clips[0],'all').map(c=>c.id),['2','3']);assert.deepEqual(rippleFollowers(clips,clips[0],'off'),[]);
+console.log('Aimants : tolérance pixel, bords, pistes désactivées, exclusions ; propagation piste/toutes pistes : OK.');
+tracks[0].snap=2;
+assert.deepEqual(snapEdges(clips,tracks,'a'),[1,3,5,6,6,8]);
+assert.deepEqual(snapEdges(clips,tracks,'b'),[]);
+assert.deepEqual(snapEdges(clips,tracks),[1,3,5,6,6,8]);
+tracks[0].snap=0;assert.deepEqual(snapEdges(clips,tracks),[]);
