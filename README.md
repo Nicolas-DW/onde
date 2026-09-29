@@ -51,6 +51,12 @@ npm ci --prefix tests
 node --test tests/*.test.mjs
 ```
 
+## Dupliquer, copier, coller
+
+- Blocs : ⌘/Ctrl + D duplique la sélection juste après elle ; ⌘/Ctrl + C, X, V copient, coupent et collent à la tête de lecture (piste du bloc sélectionné, sinon piste d'origine). Les groupes gardent leurs écarts et leurs pistes.
+- Pistes : un clic sur l'en-tête d'une piste la sélectionne ; ⌘/Ctrl + D, C, V s'appliquent alors à la piste entière avec ses blocs.
+- Mêmes actions au clic droit (bloc ou en-tête de piste), avec le bouton ⧉ de la barre d'outils, et sur téléphone (barre du bloc, outil Coller, options de piste). Une copie peut être collée dans un autre projet : ses fichiers audio suivent.
+
 ## Sur téléphone
 
 Une interface tactile s'active automatiquement sur les petits écrans (largeur ≤ 760 px, ou téléphone en paysage). Elle utilise le même montage, les mêmes projets et les mêmes réglages ; seules la présentation et les gestes changent :

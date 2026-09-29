@@ -80,7 +80,7 @@ html.mobile .mobile-selection{flex:none;display:flex;align-items:center;gap:2px;
 .selection-name{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
 .selection-name strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .selection-name small{font:11px ui-monospace,monospace;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mobile-selection button{flex:none;width:42px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;background:transparent;color:var(--text)}
+.mobile-selection button{flex:none;width:40px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;background:transparent;color:var(--text)}
 .mobile-selection .icon{width:22px;height:22px}
 .mobile-selection .fx-text{font-size:13px;font-weight:700;color:var(--mint)}
 .mobile-selection .fx-text.active{background:var(--mint);color:#16251e}
@@ -180,6 +180,7 @@ html.mobile input[type=range]::-moz-range-thumb{width:20px;height:20px;border:3p
 html.mobile .clip-menu{left:0!important;right:0;top:auto!important;bottom:0;width:auto;max-height:78dvh;padding:12px 10px calc(10px + env(safe-area-inset-bottom));border-width:1px 0 0;border-radius:18px 18px 0 0;animation:sheet-in .22s ease-out}
 html.mobile .clip-menu button{min-height:48px;padding:10px 12px;font-size:15px}
 html.mobile .clip-menu .icon,html.mobile .menu-icon-space{width:20px;height:20px}
+html.mobile .clip-menu kbd{display:none}
 html.mobile .marker-popover{left:0!important;right:0;top:auto!important;bottom:var(--keyboard,0px);width:auto;max-width:none;padding:18px 16px calc(16px + env(safe-area-inset-bottom));border-width:1px 0 0;border-radius:18px 18px 0 0;animation:sheet-in .22s ease-out}
 html.mobile .marker-popover input:not([type=checkbox]),html.mobile .marker-popover textarea{min-height:44px;font-size:16px}
 html.mobile #markerColor{width:48px;height:44px}
