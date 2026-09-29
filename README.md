@@ -51,6 +51,14 @@ npm ci --prefix tests
 node --test tests/*.test.mjs
 ```
 
+## Changer un bloc de piste sans le décaler
+
+Pendant le déplacement d’un bloc, maintenir **Maj** : le bloc garde sa position dans le temps et seul le changement de piste est appliqué (Maj peut être pressée en cours de geste). Si la tête de lecture est proche du début ou de la fin du bloc, ce bord s’aimante exactement sur elle.
+
+## Stockage des projets
+
+Chaque fichier audio n’est enregistré qu’une fois dans le navigateur (magasin `media` d’IndexedDB, partagé entre les copies d’un projet) : une sauvegarde ne réécrit que le montage et les nouveaux fichiers. Le calcul de la forme d’onde y est aussi conservé pour accélérer l’ouverture. Les projets enregistrés par une version précédente sont convertis automatiquement à la première ouverture ; un fichier audio est supprimé avec le dernier projet qui l’utilise.
+
 ## Dupliquer, copier, coller
 
 - Blocs : ⌘/Ctrl + D duplique la sélection juste après elle ; ⌘/Ctrl + C, X, V copient, coupent et collent à la tête de lecture (piste du bloc sélectionné, sinon piste d'origine). Les groupes gardent leurs écarts et leurs pistes.
