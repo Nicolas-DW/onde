@@ -14,3 +14,10 @@ export function snapEdges(clips,tracks,trackId=null,exclude=new Set()){
  return clips.filter(c=>enabled.has(c.track)&&!exclude.has(c.id)).flatMap(c=>[c.start,c.start+c.duration]);
 }
 export function rippleFollowers(clips,original,mode){return clips.filter(c=>c.id!==original.id&&c.start>original.start+1e-7&&(mode==='all'||mode==='track'&&c.track===original.track)).map(c=>({id:c.id,start:c.start}));}
+// Shift-drag between tracks: the block keeps its time, except that a playhead
+// lying close to its start or end (screen pixels) pulls that edge onto it.
+export function lockedStart(start,duration,cursor,pps,min=-Infinity,tolerance=12){
+ let result=start,distance=tolerance/pps,guide=null;
+ if(Number.isFinite(cursor))for(const offset of [0,duration]){const value=cursor-offset,d=Math.abs(value-start);if(value>=min&&d<=distance){distance=d;result=value;guide=cursor;}}
+ return {time:result,guide};
+}
