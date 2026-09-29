@@ -33,3 +33,7 @@ export function trackHeight(t,fallback){return t?.collapsed?TRACK_HEIGHT.collaps
 export function cleanTrackLayout(t){if(Number.isFinite(t.height))t.height=clamp(Math.round(t.height),TRACK_HEIGHT.min,TRACK_HEIGHT.max);else delete t.height;if(t.collapsed===true)t.collapsed=true;else delete t.collapsed;return t;}
 // Result of dragging a track's lower edge to `height` pixels.
 export function resizeTrack(t,height){if(height<TRACK_HEIGHT.collapseBelow){t.collapsed=true;return t;}delete t.collapsed;t.height=clamp(Math.round(height),TRACK_HEIGHT.min,TRACK_HEIGHT.max);return t;}
+// Offline render checkpoints in seconds, on 128-frame render quanta, at most `steps`
+// and at least `minGap` seconds apart, used to report the progress of an export.
+export function renderCheckpoints(duration,rate,steps=100,minGap=.5){const out=[],gap=Math.max(minGap,duration/steps);let last=0;for(let t=gap;t<duration;t+=gap){const frame=Math.floor(t*rate/128)*128;if(frame>last){out.push(frame/rate);last=frame;}}return out;}
+export function progressLabel(label,fraction,elapsedMs){const f=Math.max(0,Math.min(1,fraction));let text=`${label} · ${Math.floor(f*100)} %`;if(f>=.03&&f<1&&elapsedMs>=1500){const left=Math.max(1,Math.round(elapsedMs*(1-f)/f/1000));text+=' · reste ~'+(left<60?left+' s':Math.floor(left/60)+' min'+(left%60?' '+String(left%60).padStart(2,'0')+' s':''));}return text;}
