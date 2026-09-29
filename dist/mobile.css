@@ -226,3 +226,6 @@ html.mobile .asset button .icon{width:20px;height:20px}
 @keyframes bar-in{from{transform:translateY(12px);opacity:0}}
 @keyframes fade-in{from{opacity:0}}
 @media (prefers-reduced-motion:reduce){html.mobile *,html.mobile *::before,.sheet-backdrop{animation:none!important;transition:none!important}}
+html.mobile .track-name .track-collapse,html.mobile .track-resize{display:none}
+html.mobile .track.collapsed .track-header{padding:0 4px 0 8px;flex-direction:row}
+html.mobile .track.collapsed .track-more{height:28px}
