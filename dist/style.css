@@ -26,3 +26,26 @@ body{--left-panel:0px;--right-panel:0px}body.library-open{--left-panel:var(--sid
 
 .track-name{display:flex;gap:3px}.track-name input{flex:1;min-width:0;width:0}.track-name .track-remove{flex:none;width:24px;height:24px;padding:3px;border:0;background:transparent;color:var(--muted)}.track-remove .icon{width:14px;height:14px}.track-name .track-remove:hover{color:#eeafa4;background:#412b2a}
 .track.selected-track .track-header{background:#20302b;box-shadow:inset 0 0 0 1px #5d8f7c}.clip-menu kbd{margin-left:auto;font-size:10px;color:var(--muted)}
+/* Track height: default from the layout, or chosen per track (--track-h). */
+:root .track.sized{height:var(--track-h)}
+.track.sized .clip,.track.sized .cross-overlay{top:clamp(3px,12.5%,17px);height:auto;bottom:clamp(3px,12.5%,17px)}
+.track.sized .clip .wave{top:27px;height:calc(100% - 36px)}
+.track.compact .track-header{padding-top:6px;padding-bottom:6px}
+.track.compact .track-actions{margin-top:6px}
+.track.compact .track-header{overflow:hidden}
+.track.compact .track-header input[type=range],.track.compact .track-actions small{display:none}
+.track.compact .clip-name{top:2px}
+.track.compact .clip .wave{top:17px;height:calc(100% - 20px)}
+.track.collapsed .track-header{padding:0 14px;display:flex;align-items:center}
+.track.collapsed .track-name{flex:1;min-width:0}
+.track.collapsed .track-actions,.track.collapsed .track-header input[type=range]{display:none}
+.track.collapsed .clip-name{top:50%;transform:translateY(-50%);font-size:10px;opacity:.9}
+.track.collapsed .clip .wave{top:1px;height:calc(100% - 2px);opacity:.45}
+.track.collapsed :is(.envelope-svg,.fade-handle,.clip-gain,.clip-fx,.hesitation-band,.transition-marker,.cross-overlay){display:none}
+.track.collapsed .trim{top:0}
+.track-name .track-collapse{flex:none;width:22px;height:24px;padding:3px;border:0;background:transparent;color:var(--muted)}
+.track-collapse .icon{width:14px;height:14px}
+.track-name .track-collapse:hover,.track-name .track-collapse[aria-pressed=true]{color:var(--mint)}
+.track-resize{position:absolute;left:0;right:0;bottom:-4px;height:8px;z-index:9;cursor:row-resize;touch-action:none}
+.track-resize:hover,.resizing-track .track-resize:active{background:linear-gradient(transparent 3px,var(--mint) 3px,var(--mint) 5px,transparent 5px);opacity:.7}
+body.resizing-track{cursor:row-resize;user-select:none}

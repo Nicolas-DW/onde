@@ -55,6 +55,12 @@ node --test tests/*.test.mjs
 
 Pendant le déplacement d’un bloc, maintenir **Maj** : le bloc garde sa position dans le temps et seul le changement de piste est appliqué (Maj peut être pressée en cours de geste). Si la tête de lecture est proche du début ou de la fin du bloc, ce bord s’aimante exactement sur elle.
 
+## Hauteur des pistes
+
+- Le bouton ⌃ à côté du nom réduit une piste à une fine bande (nom, blocs et forme d’onde, sans les réglages) ; ⌄ l’agrandit. Alt + clic réduit ou agrandit toutes les pistes. Aussi dans le clic droit sur l’en-tête, et sur téléphone dans les options de piste (« Réduite »).
+- Glisser le bord inférieur d’une piste règle sa hauteur ; en la tirant presque à zéro, elle se réduit. Double-clic sur ce bord : hauteur par défaut.
+- La hauteur est enregistrée avec le projet et peut être annulée comme les autres modifications, sans interrompre la lecture.
+
 ## Stockage des projets
 
 Chaque fichier audio n’est enregistré qu’une fois dans le navigateur (magasin `media` d’IndexedDB, partagé entre les copies d’un projet) : une sauvegarde ne réécrit que le montage et les nouveaux fichiers. Le calcul de la forme d’onde y est aussi conservé pour accélérer l’ouverture. Les projets enregistrés par une version précédente sont convertis automatiquement à la première ouverture ; un fichier audio est supprimé avec le dernier projet qui l’utilise.
